@@ -1,5 +1,4 @@
 const numeriGenerati = [];
-const numeriGeneratiDue=[];
 
 const gridContainer = document.getElementById('grid-container');
 
@@ -14,15 +13,33 @@ playButton.addEventListener('click',
         gridContainer.innerHTML = '';
 
         for (let i = 1; i <= 100; i++) {
+           
 
             const newCell = createNewCell(i);
             gridContainer.append(newCell);
-
+           
         }
 
     }
 
 );
+
+function getNumber(min, max) {
+    return Math.floor((Math.random()) * (max - min + 1)) + min;
+}
+let randomNumber;
+for(let i = 0;i<16;i++){
+    randomNumber = getNumber(1, 100);
+
+    while(numeriGenerati.includes(randomNumber)){
+        randomNumber = getNumber(1, 100);
+    }
+
+    numeriGenerati.push(randomNumber);
+}
+console.log(numeriGenerati);
+
+console.log(randomNumber);
 
 function createNewCell(num) {
 
@@ -31,7 +48,18 @@ function createNewCell(num) {
     cell.addEventListener('click',
 
         function () {
-
+            const currNum = cell.innerHTML;
+             if(numeriGenerati.includes(currNum)){
+                cell.classList.add("flower");
+                cell.classList.remove("bomb")
+                
+            }
+            else{
+                cell.classList.add("bomb");
+                cell.classList.remove("flower")
+                
+            }
+            
             console.log(num);
 
             this.classList.add('clicked');
@@ -40,52 +68,13 @@ function createNewCell(num) {
 
     );
     
-
+        
         cell.innerHTML = num;
 
         return cell;
 
 }
-function getNumber(min, max) {
-    return Math.floor((Math.random()) * (max - min + 1)) + min;
-}
-let randomNumber = getNumber(1, 16);
-    
-while(numeriGenerati.includes(randomNumber)){
-    randomNumber = getNumber(1, 16);
-}
 
-numeriGenerati.push(randomNumber);
-
-console.log(numeriGenerati);
-
-console.log(randomNumber);
-
-
-
-
-
-function getSecondNumber(min, max) {
-    return Math.floor((Math.random()) * (max - min + 1)) + min;
-}
-let randomSecondNumber = getSecondNumber(1, 100);
-    
-while(numeriGeneratiDue.includes(randomNumber)){
-    randomSecondNumber = getSecondNumber(1, 100);
-}
-
-numeriGeneratiDue.push(randomSecondNumber);
-
-console.log(numeriGeneratiDue);
-
-console.log(randomSecondNumber);
-
-
-    if (numeriGeneratiDue.includes(numeriGenerati) ) {
-        numeriGeneratiDue.push(numeriGenerati)
-        
-        alert("hai perso")
-    }
  
 
 
